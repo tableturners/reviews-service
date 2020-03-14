@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import $ from 'jquery';
 import { ajax } from 'jquery';
 import ReviewList from './ReviewList.jsx';
+
 class App extends React.Component {
     constructor(props) {
         super(props)
