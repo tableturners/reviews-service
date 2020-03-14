@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewEntry from './ReviewEntry.jsx'
 const ReviewList = (props) => {
-    console.log(props);
+   // console.log(props);
   return (
     <div className="Review-list">
       {
