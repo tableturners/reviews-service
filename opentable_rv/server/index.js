@@ -14,9 +14,11 @@ app.use(express.static(path.join(__dirname, '../client/dist/')))
 
 // });
 
-app.get('/api/reviewlist', (req, res) => {
-    console.log('server: ', req.body);
-    db.getReviewList((err, rows, fields) => {
+app.get('/api/reviewlist/:restId', (req, res) => {
+    console.log("choice id is " +req.params.restId);
+
+    // console.log('server: ', req.body);
+    db.getReviewListByRestaurantId(req.params.restId,(err, rows, fields) => {
         if (err) {
             console.log('error in GET server/index')
         } else {

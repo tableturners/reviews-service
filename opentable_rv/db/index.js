@@ -39,8 +39,8 @@ const getrestaurantId = function (callback) { // get restaurantID
 
 
 
-const getReviewList = function (callback) { //get reviewlist 
-    let query = `SELECT * FROM reviews`
+const getReviewListByRestaurantId = function (restId,callback) { //get reviewlist 
+    let query = `SELECT * FROM reviews WHERE restaurant_id = ${restId}`
     
     connection.query(query, (err, rows, fields) => {
         if (err) {
@@ -74,7 +74,7 @@ const insertReview = function (randomId,callback) {
 // module.exports = {insertRestaurant,
 //     insertReview}
 module.exports = {
-    getReviewList,
+    getReviewListByRestaurantId,
     insertReview,
     getrestaurantId,
     insertRestaurant
