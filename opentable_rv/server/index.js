@@ -35,7 +35,7 @@ const getRestaurantIdsAndInsertReviews = (req, res) => {
        //let randomId = restaurantIdarray[Math.floor(Math.random() * restaurantIdarray.length)];
         // TODO: select all restaurant IDs from mysql so we can pass 
         // a random restaurant ID into db.insertReview
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 500; i++) {
         let randomId = restaurantIdarray[Math.floor(Math.random() * restaurantIdarray.length)];
             db.insertReview(randomId,(err, rows, fields) => {
                 if (err) {
@@ -52,7 +52,7 @@ const getRestaurantIdsAndInsertReviews = (req, res) => {
 }
 
 app.post('/api/reviewlist', (req, res) => {
-    for (var i = 0; i < 10; i++) //insert created data to db
+    for (var i = 0; i < 30; i++) //insert created data to db
     {
         db.insertRestaurant((err, rows, fields) => {
             if (err) {

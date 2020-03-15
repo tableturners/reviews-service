@@ -15,12 +15,14 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        
         this.getReviews();
     }
 
 
     getReviews() {
-        $.get('/api/reviewlist', (rows) => {
+        let restId = Math.floor(Math.random() * 30)
+        $.get(`/api/reviewlist/${restId}`, (rows) => {
             this.setState({
                 review: rows
             })
