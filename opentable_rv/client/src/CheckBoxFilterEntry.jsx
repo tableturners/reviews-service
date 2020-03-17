@@ -33,7 +33,7 @@ class CheckBoxFilterEntry extends React.Component {
             <div>
                 <div className='filterEntry'>
                     <input type="checkbox" onChange={this.onChange} />
-                    {this.props.tag.key}
+                    {this.props.tag}
                 </div>
             </div>
         )

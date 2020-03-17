@@ -16,11 +16,8 @@ const keyTagMaker = function(){
         // if (!keyTagData.includes(currentRandomElement)) {
         //     keyTagData.push(currentRandomElement);
         // }
-        keyTagData.push(
-            {
-              key: currentRandomElement
-            }
-        )
+        
+        keyTagData.push(currentRandomElement);
         console.log("everytime +++", keyTagData)
     }
     return keyTagData;
