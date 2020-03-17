@@ -39,7 +39,7 @@ class App extends React.Component {
 
     render() {
         
-        console.log(keyTagMaker());
+        // console.log(keyTagMaker());
         return (
             <div>
                 <h1>ReviewList</h1>

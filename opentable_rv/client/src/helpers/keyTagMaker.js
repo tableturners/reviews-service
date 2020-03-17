@@ -10,14 +10,13 @@ const keyTag = ['calculate','capacitor','bandwidth','bluetooth','synthesize','tr
 // }
 
 const keyTagMaker = function(){
-    let keyTagData = [];
-    for(var i = 0; i < Math.floor(Math.random() * 6); i++){
+    const numberOfTags = Math.floor(Math.random() * 6 + 1);
+    let keyTagData = []; 
+    for(var i = 0; i < numberOfTags; i++){
         const currentRandomElement = keyTag[Math.floor(Math.random() * keyTag.length)];
-        // if (!keyTagData.includes(currentRandomElement)) {
-        //     keyTagData.push(currentRandomElement);
-        // }
-        
-        keyTagData.push(currentRandomElement);
+        if (!keyTagData.includes(currentRandomElement)) {
+            keyTagData.push(currentRandomElement);
+        }
         console.log("everytime +++", keyTagData)
     }
     return keyTagData;
