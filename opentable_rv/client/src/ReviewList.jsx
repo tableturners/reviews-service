@@ -1,5 +1,7 @@
 import React from 'react';
 import ReviewEntry from './ReviewEntry.jsx'
+import "./ReviewList.css";
+
 const ReviewList = (props) => {
    // console.log(props);
   return (

@@ -4,6 +4,9 @@ import ReactDom from 'react-dom';
 import $ from 'jquery';
 import { ajax } from 'jquery';
 import ReviewList from './ReviewList.jsx';
+import CheckBoxFilter from './CheckBoxFilter.jsx';
+import keyTagMaker from './helpers/keyTagMaker.js'
+
 
 class App extends React.Component {
     constructor(props) {
@@ -32,15 +35,16 @@ class App extends React.Component {
     //     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().split('T')[0];
     //   }
       
-     
+    
 
     render() {
         
-        console.log(this.state);
+        console.log(keyTagMaker());
         return (
             <div>
                 <h1>ReviewList</h1>
                 <div>
+                    <CheckBoxFilter data ={keyTagMaker()}/>
                     <ReviewList list={this.state.review} />
                 </div>
             </div>
