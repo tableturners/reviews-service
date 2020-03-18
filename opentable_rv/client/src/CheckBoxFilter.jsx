@@ -10,6 +10,7 @@ class CheckBoxFilter extends React.Component {
         }
     }
     render() {
+        console.log(this.props.data)
         return (
             <div className="CheckBox-list">
             <div>Filters

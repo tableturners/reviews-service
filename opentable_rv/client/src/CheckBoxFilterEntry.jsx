@@ -20,19 +20,22 @@ class CheckBoxFilterEntry extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+            isClicked: false,
         }
+        // this.onChange = this.onChange.bind(this);
     }
 
-    onChange(e){
-
-    }
+    // onChange(event){
+    //     this.setState({isClicked:event.target.checked})
+    //     console.log(event.target.checked);
+    // }
 
     render() {
+        console.log(this.props.tag)
         return (
             <div>
                 <div className='filterEntry'>
-                    <input type="checkbox" onChange={this.onChange} />
+                    <input type="checkbox" onChange={this.props.updateFilterStatus} />
                     {this.props.tag}
                 </div>
             </div>
