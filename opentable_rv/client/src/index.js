@@ -26,7 +26,7 @@ class App extends React.Component {
         this.state = {
             keyTag: keyTagMaker(),
             allReview: [],
-            filterReviews:[],
+            filterReviews: [],
             filter: new Set(),
         }
         this.getReviews = this.getReviews.bind(this)
@@ -34,8 +34,15 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        
+
         this.getReviews();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.allReview !== this.state.allReview
+            || prevState.filter !== this.state.filter) {
+            this.calculateFilteredReviews();
+        }
     }
 
 
@@ -48,12 +55,33 @@ class App extends React.Component {
         })
     }
 
-    calculateFilteredReviews(){
+    calculateFilteredReviews() {
+        console.warn(`
+            calculateFilteredReviews running with allReviews: ${JSON.stringify(this.state.allReview)}\n\n
+            filters: ${JSON.stringify(Array.from(this.state.filter))}
+            `);
 
+        let newFilterReviews = [];
+        for (let i = 0; i < this.state.allReview.length; i++) {
+           // console.log(this.state.allReview[0].paragraph)
+            //console.log(this.state.allReview[i])
+            
+            for (let tag of this.state.filter) {
+                console.log(tag)
+                const currentReview = this.state.allReview[i]
+                if(currentReview.paragraph.includes(tag)){
+                   newFilterReviews.push(currentReview)
+                }
+                
+            }
+        }
+
+        console.warn(`calculateFilteredReviews done running. The result is $${JSON.stringify(newFilterReviews)}$`);
+        this.setState({filterReviews: newFilterReviews})
     }
-  
+
     // take 2 arguments, the tag name, and whether it's checked.
-    updateFilterStatus(tag,isChecked){
+    updateFilterStatus(tag, isChecked) {
         const copyOfOldSet = new Set(this.state.filter);
         if (isChecked) {
             copyOfOldSet.add(tag);
@@ -76,17 +104,18 @@ class App extends React.Component {
         //     )
         // }
     }
-   
+
 
     render() {
-        
-         //console.log(this.props.data);
+        console.log(this.state.allReview)
+        // console.log(this.state.allReview[0].id)
+        //console.log(this.props.data);
         return (
             <div>
                 <h1>ReviewList</h1>
                 <div>
-                    <CheckBoxFilter data ={this.state.keyTag} updateFilterStatus = {this.updateFilterStatus}/>
-                    <ReviewList list={this.state.allReview} />
+                    <CheckBoxFilter data={this.state.keyTag} updateFilterStatus={this.updateFilterStatus} />
+                    <ReviewList list={this.state.filterReviews} />
                 </div>
             </div>
         )
