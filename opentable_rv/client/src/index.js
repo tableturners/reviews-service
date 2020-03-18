@@ -55,6 +55,17 @@ class App extends React.Component {
         })
     }
 
+    // returns a boolean
+    doesReviewSatisfyFilters(review, filters) {
+        for (let tag of filters) {
+            if (!review.paragraph.includes(tag)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     calculateFilteredReviews() {
         console.warn(`
             calculateFilteredReviews running with allReviews: ${JSON.stringify(this.state.allReview)}\n\n
@@ -63,17 +74,12 @@ class App extends React.Component {
 
         let newFilterReviews = [];
         for (let i = 0; i < this.state.allReview.length; i++) {
-           // console.log(this.state.allReview[0].paragraph)
-            //console.log(this.state.allReview[i])
-            
-            for (let tag of this.state.filter) {
-                console.log(tag)
-                const currentReview = this.state.allReview[i]
-                if(currentReview.paragraph.includes(tag)){
-                   newFilterReviews.push(currentReview)
-                }
-                
-            }
+
+            const currentReview = this.state.allReview[i]
+
+            if(this.doesReviewSatisfyFilters(currentReview, this.state.filter)){
+                newFilterReviews.push(currentReview)
+             }
         }
 
         console.warn(`calculateFilteredReviews done running. The result is $${JSON.stringify(newFilterReviews)}$`);
