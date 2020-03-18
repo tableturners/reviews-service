@@ -19,24 +19,25 @@ import "./CheckBoxFilterEntry.css"
 class CheckBoxFilterEntry extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            isClicked: false,
-        }
-        // this.onChange = this.onChange.bind(this);
+        
+        this.handleChange = this.handleChange.bind(this)
     }
 
-    // onChange(event){
-    //     this.setState({isClicked:event.target.checked})
-    //     console.log(event.target.checked);
-    // }
+  
+
+    handleChange(event) {
+        const isChecked = event.target.checked;
+        this.props.updateFilterStatus(this.props.tag, isChecked);
+    }
 
     render() {
-        console.log(this.props.tag)
+        //console.log(this.props.tag)
         return (
             <div>
                 <div className='filterEntry'>
-                    <input type="checkbox" onChange={this.props.updateFilterStatus} />
+                    <input type="checkbox" onChange={this.handleChange} />
                     {this.props.tag}
+                   
                 </div>
             </div>
         )

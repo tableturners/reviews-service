@@ -24,11 +24,13 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            keyTag: keyTagMaker(),
             allReview: [],
             filterReviews:[],
             filter: new Set(),
         }
         this.getReviews = this.getReviews.bind(this)
+        this.updateFilterStatus = this.updateFilterStatus.bind(this)
     }
 
     componentDidMount() {
@@ -50,28 +52,40 @@ class App extends React.Component {
 
     }
   
-    updateFilterStatus(e){
-        if(e.target.checked){
-            this.setState(({filter}) =>({
-                filter:new Set(filter).add(this.props.tag)
-            }))
+    // take 2 arguments, the tag name, and whether it's checked.
+    updateFilterStatus(tag,isChecked){
+        const copyOfOldSet = new Set(this.state.filter);
+        if (isChecked) {
+            copyOfOldSet.add(tag);
         } else {
-            this.setState(({filter}) =>({
-                filter:new Set(filter).delete(this.props.tag)
-            })
-            )
+            copyOfOldSet.delete(tag);
         }
+
+        this.setState({
+            filter: copyOfOldSet
+        });
+
+        // if(isChecked){
+        //     this.setState(({filter}) =>({
+        //         filter:new Set(filter).add(tag)
+        //     }))
+        // } else {
+        //     this.setState(({filter}) =>({
+        //         filter:new Set(filter).delete(tag)
+        //     })
+        //     )
+        // }
     }
-    
+   
 
     render() {
         
-         console.log(this.props.data);
+         //console.log(this.props.data);
         return (
             <div>
                 <h1>ReviewList</h1>
                 <div>
-                    <CheckBoxFilter data ={keyTagMaker()} updateFilterStatus = {this.updateFilterStatus}/>
+                    <CheckBoxFilter data ={this.state.keyTag} updateFilterStatus = {this.updateFilterStatus}/>
                     <ReviewList list={this.state.allReview} />
                 </div>
             </div>

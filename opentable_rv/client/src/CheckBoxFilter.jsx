@@ -10,13 +10,28 @@ class CheckBoxFilter extends React.Component {
         }
     }
     render() {
-        console.log(this.props.data)
+        console.log(this.props.data);
+
+        const checkBoxFilterEntries = [];
+        for (let i = 0; i < this.props.data.length; i++) {
+            const currentTag = this.props.data[i];
+            const checkBoxFilterEntry = (
+                <CheckBoxFilterEntry 
+                    tag={currentTag}
+                    key={currentTag}
+                    updateFilterStatus={this.props.updateFilterStatus}
+                />);
+            checkBoxFilterEntries.push(checkBoxFilterEntry);
+        }
+
         return (
             <div className="CheckBox-list">
             <div>Filters
-                {
-                    this.props.data.map(tag => <CheckBoxFilterEntry tag={tag} key={tag} />)
-                }
+                {checkBoxFilterEntries}
+
+                {/* {
+                    this.props.data.map((tag) => <CheckBoxFilterEntry tag={tag} key={tag}  updateFilterStatus={this.props.updateFilterStatus}/>)
+                } */}
             </div>
             </div>
         )
