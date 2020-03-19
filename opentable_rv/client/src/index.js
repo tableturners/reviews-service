@@ -7,6 +7,7 @@ import ReviewList from './ReviewList.jsx';
 import CheckBoxFilter from './CheckBoxFilter.jsx';
 import keyTagMaker from './helpers/keyTagMaker.js'
 import { set } from 'mongoose';
+import DropDownRating from './DropDownRating.jsx';
 
 /* TODO(filtering):
 Data Structure: all of this in app state
@@ -28,9 +29,12 @@ class App extends React.Component {
             allReview: [],
             filterReviews: [],
             filter: new Set(),
+            sortingStrategy: 'newest rating'
+           
         }
         this.getReviews = this.getReviews.bind(this)
         this.updateFilterStatus = this.updateFilterStatus.bind(this)
+        this.selectDropDownOption = this.selectDropDownOption.bind(this)
     }
 
     componentDidMount() {
@@ -38,11 +42,12 @@ class App extends React.Component {
         this.getReviews();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) { // if the state changes , we call the calculateFilteredReviews
         if (prevState.allReview !== this.state.allReview
             || prevState.filter !== this.state.filter) {
             this.calculateFilteredReviews();
         }
+
     }
 
 
@@ -65,14 +70,17 @@ class App extends React.Component {
 
         return true;
     }
-
+  // if need nested array method, make a help function 
     calculateFilteredReviews() {
-        console.warn(`
-            calculateFilteredReviews running with allReviews: ${JSON.stringify(this.state.allReview)}\n\n
-            filters: ${JSON.stringify(Array.from(this.state.filter))}
-            `);
+        // console.warn(`
+        //     calculateFilteredReviews running with allReviews: ${JSON.stringify(this.state.allReview)}\n\n
+        //     filters: ${JSON.stringify(Array.from(this.state.filter))}
+        //     `);
 
         let newFilterReviews = [];
+       console.log(this.state.allReview.sort(function(a,b){
+           return new Date(b.DinedDate) - new Date(a.DinedDate);
+       }))
         for (let i = 0; i < this.state.allReview.length; i++) {
 
             const currentReview = this.state.allReview[i]
@@ -82,8 +90,10 @@ class App extends React.Component {
              }
         }
 
-        console.warn(`calculateFilteredReviews done running. The result is $${JSON.stringify(newFilterReviews)}$`);
-        this.setState({filterReviews: newFilterReviews})
+        // console.warn(`calculateFilteredReviews done running. The result is $${JSON.stringify(newFilterReviews)}$`);
+        this.setState({filterReviews: newFilterReviews},() => {
+            this.selectDropDownOption(this.state.sortingStrategy)
+        });
     }
 
     // take 2 arguments, the tag name, and whether it's checked.
@@ -98,28 +108,48 @@ class App extends React.Component {
         this.setState({
             filter: copyOfOldSet
         });
+    }
 
-        // if(isChecked){
-        //     this.setState(({filter}) =>({
-        //         filter:new Set(filter).add(tag)
-        //     }))
-        // } else {
-        //     this.setState(({filter}) =>({
-        //         filter:new Set(filter).delete(tag)
-        //     })
-        //     )
-        // }
+    // TODO: refactor. DRY. "Dont repeat yourself"
+    selectDropDownOption(options){
+        this.setState({
+            sortingStrategy: options
+        });
+
+        if(options === 'newest rating'){
+            this.setState({
+                filterReviews: this.state.filterReviews.sort(function(a,b){
+                    return new Date(b.DinedDate) - new Date(a.DinedDate)
+                })
+            })
+        }
+        if (options ==='highest rating'){
+            this.setState({
+                filterReviews: this.state.filterReviews.sort(function(a,b){
+                    return b.overall - a.overall
+                })
+            })
+        }
+        if(options ==='lowest rating'){
+            this.setState({
+                filterReviews: this.state.filterReviews.sort(function(a,b){
+                    return a.overall - b.overall
+                })
+            }) 
+        }
     }
 
 
+
     render() {
-        console.log(this.state.allReview)
+        // console.log(this.state.allReview[0].overall)
         // console.log(this.state.allReview[0].id)
         //console.log(this.props.data);
         return (
             <div>
                 <h1>ReviewList</h1>
                 <div>
+                    <DropDownRating selectDropDownOption = {this.selectDropDownOption}/>
                     <CheckBoxFilter data={this.state.keyTag} updateFilterStatus={this.updateFilterStatus} />
                     <ReviewList list={this.state.filterReviews} />
                 </div>
