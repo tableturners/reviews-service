@@ -123,20 +123,20 @@ class App extends React.Component {
                     return new Date(b.DinedDate) - new Date(a.DinedDate)
                 })
             })
-        }
-        if (options === constants.HIGHEST_RATING){
+        } else if (options === constants.HIGHEST_RATING){
             this.setState({
                 filterReviews: this.state.filterReviews.sort(function(a,b){
                     return b.overall - a.overall
                 })
             })
-        }
-        if(options === constants.LOWEST_RATING){
+        } else if (options === constants.LOWEST_RATING){
             this.setState({
                 filterReviews: this.state.filterReviews.sort(function(a,b){
                     return a.overall - b.overall
                 })
             }) 
+        } else {
+            throw `Invalid selected drop down option: ${options}`;
         }
     }
 
