@@ -8,6 +8,7 @@ import CheckBoxFilter from './CheckBoxFilter.jsx';
 import keyTagMaker from './helpers/keyTagMaker.js'
 import { set } from 'mongoose';
 import DropDownRating from './DropDownRating.jsx';
+import * as constants from './helpers/constants.js';
 
 /* TODO(filtering):
 Data Structure: all of this in app state
@@ -29,7 +30,7 @@ class App extends React.Component {
             allReview: [],
             filterReviews: [],
             filter: new Set(),
-            sortingStrategy: 'newest rating'
+            sortingStrategy: constants.HIGHEST_RATING,
            
         }
         this.getReviews = this.getReviews.bind(this)
@@ -116,21 +117,21 @@ class App extends React.Component {
             sortingStrategy: options
         });
 
-        if(options === 'newest rating'){
+        if(options === constants.NEWEST_RATING){
             this.setState({
                 filterReviews: this.state.filterReviews.sort(function(a,b){
                     return new Date(b.DinedDate) - new Date(a.DinedDate)
                 })
             })
         }
-        if (options ==='highest rating'){
+        if (options === constants.HIGHEST_RATING){
             this.setState({
                 filterReviews: this.state.filterReviews.sort(function(a,b){
                     return b.overall - a.overall
                 })
             })
         }
-        if(options ==='lowest rating'){
+        if(options === constants.LOWEST_RATING){
             this.setState({
                 filterReviews: this.state.filterReviews.sort(function(a,b){
                     return a.overall - b.overall

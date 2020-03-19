@@ -1,5 +1,7 @@
 import React from 'react';
 import "./DropDownRating.css"
+import * as constants from './helpers/constants.js';
+
 // const DropDownRating = (props) => {
 //   console.log(props)
 //   return (
@@ -31,10 +33,10 @@ class DropDownRating extends React.Component{
 render(){
     return(
         <div className = "dropDown">  
-    <select onChange={this.handleChange}>  
-    <option selected value="newest rating">newest rating</option>
-    <option value="highest rating">highest rating</option>
-    <option value="lowest rating">lowest rating</option>
+    <select onChange={this.handleChange} defaultValue={constants.HIGHEST_RATING}>  
+    <option value={constants.NEWEST_RATING}>newest rating</option>
+    <option value={constants.HIGHEST_RATING}>highest rating</option>
+    <option value={constants.LOWEST_RATING}>lowest rating</option>
     </select>
     </div>
     )
