@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDom from 'react-dom';
 //import App from './App.jsx';
 import $ from 'jquery';
-import { ajax } from 'jquery';
 import ReviewList from './ReviewList.jsx';
 import CheckBoxFilter from './CheckBoxFilter.jsx';
 import keyTagMaker from './helpers/keyTagMaker.js'
-import { set } from 'mongoose';
 import DropDownRating from './DropDownRating.jsx';
 import * as constants from './helpers/constants.js';
+import OverallRatingDisplay from './OverallRatingDisplay.jsx';
 
 /* TODO(filtering):
 Data Structure: all of this in app state
@@ -36,6 +35,7 @@ class App extends React.Component {
         this.getReviews = this.getReviews.bind(this)
         this.updateFilterStatus = this.updateFilterStatus.bind(this)
         this.selectDropDownOption = this.selectDropDownOption.bind(this)
+       
     }
 
     componentDidMount() {
@@ -79,9 +79,7 @@ class App extends React.Component {
         //     `);
 
         let newFilterReviews = [];
-       console.log(this.state.allReview.sort(function(a,b){
-           return new Date(b.DinedDate) - new Date(a.DinedDate);
-       }))
+       console.log(this.state.allReview.length)
         for (let i = 0; i < this.state.allReview.length; i++) {
 
             const currentReview = this.state.allReview[i]
@@ -111,35 +109,52 @@ class App extends React.Component {
         });
     }
 
-    // TODO: refactor. DRY. "Dont repeat yourself"
-    selectDropDownOption(options){
-        this.setState({
-            sortingStrategy: options
-        });
-
-        if(options === constants.NEWEST_RATING){
-            this.setState({
-                filterReviews: this.state.filterReviews.sort(function(a,b){
-                    return new Date(b.DinedDate) - new Date(a.DinedDate)
-                })
-            })
-        } else if (options === constants.HIGHEST_RATING){
-            this.setState({
-                filterReviews: this.state.filterReviews.sort(function(a,b){
-                    return b.overall - a.overall
-                })
-            })
-        } else if (options === constants.LOWEST_RATING){
-            this.setState({
-                filterReviews: this.state.filterReviews.sort(function(a,b){
-                    return a.overall - b.overall
-                })
-            }) 
+    getSortingFunctionBySelectedSortOption(sortOption) {
+        if(sortOption === constants.NEWEST_RATING){
+            return function(a,b){
+                return new Date(b.DinedDate) - new Date(a.DinedDate)
+            };
+        } else if (sortOption === constants.HIGHEST_RATING){
+            return function(a,b){
+                return b.overall - a.overall
+            };
+        } else if (sortOption === constants.LOWEST_RATING){
+            return function(a,b){
+                return a.overall - b.overall
+            };
         } else {
             throw `Invalid selected drop down option: ${options}`;
         }
     }
 
+    selectDropDownOption(options){
+        this.setState({
+            sortingStrategy: options
+        });
+
+        let sortingFunction = this.getSortingFunctionBySelectedSortOption(options);
+
+        let newFilterReviews = this.state.filterReviews.sort(sortingFunction);
+        this.setState({filterReviews: newFilterReviews});
+    }
+
+    // calcluateThenumbersOfReviews (){
+    //     let total = this.state.allReview.length;
+
+    //     console.log(this.state.allReview.length)
+    //     return total;
+    // }
+
+    
+
+    // calcluateTheAveofOverall (){
+    //     let totalOverAll =0
+    //     for(let i = 0 ; i < this.state.allReview.length; i++){
+    //         totalOverAll = totalOverAll + this.state.allReview[i].overall
+    //     }
+    //     let aveOverall = (totalOverAll / this.state.allReview.length).toFixed(1);
+    //     return aveOverall
+    // }
 
 
     render() {
@@ -150,6 +165,9 @@ class App extends React.Component {
             <div>
                 <h1>ReviewList</h1>
                 <div>
+                    <OverallRatingDisplay 
+                        allReview={this.state.allReview}
+                    />
                     <DropDownRating selectDropDownOption = {this.selectDropDownOption}/>
                     <CheckBoxFilter data={this.state.keyTag} updateFilterStatus={this.updateFilterStatus} />
                     <ReviewList list={this.state.filterReviews} />

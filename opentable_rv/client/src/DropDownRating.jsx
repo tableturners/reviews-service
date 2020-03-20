@@ -32,7 +32,8 @@ class DropDownRating extends React.Component{
 
 render(){
     return(
-        <div className = "dropDown">  
+        <div className = "dropDown"> 
+    <h1 className = 'header'>Sort by</h1>     
     <select onChange={this.handleChange} defaultValue={constants.HIGHEST_RATING}>  
     <option value={constants.NEWEST_RATING}>newest rating</option>
     <option value={constants.HIGHEST_RATING}>highest rating</option>
