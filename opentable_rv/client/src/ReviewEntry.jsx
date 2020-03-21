@@ -1,9 +1,10 @@
 import React from 'react';
 import "./ReviewEntry.css";
-
+import Rating from '@material-ui/lab/Rating';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Avatar } from '@material-ui/core';
+import { mergeClasses } from '@material-ui/styles';
 
 const ReviewEntry = (props) => {
     // console.log('ggggg', props)
@@ -11,7 +12,7 @@ const ReviewEntry = (props) => {
         <div className="txn-row reviewEntry">
             <div className="userData">
                 <Avatar>
-                <div className="txn-data">{props.list.username.substring(0, 2)}</div>
+                <div className="red">{props.list.username.substring(0, 2)}</div>
                 </Avatar>
                 <div className="txn-data username">{props.list.username}</div>
                  <div className="txn-data">{props.list.place}</div>
@@ -19,7 +20,7 @@ const ReviewEntry = (props) => {
                
             </div>
             <div className="reviewData">
-                <div className="txn-data">{props.list.star}Dined on{props.list.DinedDate}</div>
+                <div className="txn-data"><Rating name="read-only"  value={props.list.overall} readOnly />  Dined on{props.list.DinedDate}</div>
                 <div className="txn-data"></div>
                 <div className="ratings">
                     <div className="ratingName">overall &nbsp;</div>

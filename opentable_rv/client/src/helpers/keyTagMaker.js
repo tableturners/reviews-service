@@ -2,7 +2,7 @@ import React from "react"
 
 
 const keyTag = ['calculate','capacitor','bandwidth','bluetooth','synthesize','transmit','monitor','auxiliary',
-'synthesize',"redundant",'matrix','virtual','SCSI','circuit','application','protocol','open-source','SDD','navigating','microchip']
+'synthesize',"redundant",'matrix','virtual','SCSI','circuit','application','protocol','source','SDD','navigating','microchip']
 
 
 // const randomkeyTagMaker = function(){

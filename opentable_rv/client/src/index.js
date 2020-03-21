@@ -147,14 +147,6 @@ class App extends React.Component {
 
     
 
-    // calcluateTheAveofOverall (){
-    //     let totalOverAll =0
-    //     for(let i = 0 ; i < this.state.allReview.length; i++){
-    //         totalOverAll = totalOverAll + this.state.allReview[i].overall
-    //     }
-    //     let aveOverall = (totalOverAll / this.state.allReview.length).toFixed(1);
-    //     return aveOverall
-    // }
 
 
     render() {

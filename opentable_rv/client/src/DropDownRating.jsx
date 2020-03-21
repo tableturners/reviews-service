@@ -1,6 +1,10 @@
 import React from 'react';
 import "./DropDownRating.css"
 import * as constants from './helpers/constants.js';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 // const DropDownRating = (props) => {
 //   console.log(props)
@@ -17,31 +21,44 @@ import * as constants from './helpers/constants.js';
 // }
 
 
-class DropDownRating extends React.Component{
-    constructor(props){
+class DropDownRating extends React.Component {
+    constructor(props) {
         super(props)
-        this.state ={}
+        this.state = {}
 
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleChange(e){
+    handleChange(e) {
         this.props.selectDropDownOption(e.target.value)
     }
 
 
-render(){
-    return(
-        <div className = "dropDown"> 
-    <h1 className = 'header'>Sort by</h1>     
-    <select onChange={this.handleChange} defaultValue={constants.HIGHEST_RATING}>  
-    <option value={constants.NEWEST_RATING}>newest rating</option>
-    <option value={constants.HIGHEST_RATING}>highest rating</option>
-    <option value={constants.LOWEST_RATING}>lowest rating</option>
-    </select>
-    </div>
-    )
-}
+    render() {
+        return (
+
+            <div className="dropDown">
+                <h1 className='header'>Sort by</h1>
+                <FormControl variant="outlined">
+                    <InputLabel id="demo-simple-select-outlined-label"></InputLabel>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        defaultValue={constants.NEWEST_RATING}
+                        onChange={this.handleChange}
+
+                    >
+
+                        <MenuItem value={constants.NEWEST_RATING}>newest rating</MenuItem>
+                        <MenuItem value={constants.HIGHEST_RATING}>highest rating</MenuItem>
+                        <MenuItem value={constants.LOWEST_RATING}>lowest rating</MenuItem>
+                    </Select>
+                </FormControl>
+
+
+            </div>
+        )
+    }
 
 }
 

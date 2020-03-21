@@ -26,7 +26,7 @@ class CheckBoxFilter extends React.Component {
 
         return (
             <div className="CheckBox-list">
-            <div>Filters
+            <div className="container">Filters
                 {checkBoxFilterEntries}
 
                 {/* {
