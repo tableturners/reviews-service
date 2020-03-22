@@ -1,0 +1,16 @@
+.OverallRatingBar-container {
+    /* display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: center; */
+}
+
+.OverallRatingBar-ProgressBarWrapper {
+    min-width: 300px;
+    padding-left: 10px;
+    border: 2px solid transparent;
+}
+
+.OverallRatingBar-ProgressBarWrapper:hover {
+    border: 2px solid red;
+}

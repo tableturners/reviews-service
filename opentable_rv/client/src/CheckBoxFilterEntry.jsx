@@ -33,9 +33,9 @@ class CheckBoxFilterEntry extends React.Component {
     render() {
         //console.log(this.props.tag)
         return (
-            <div className= "container">
-                <div className='filterEntry'>
-                    <input className='checkbox' type="checkbox" onChange={this.handleChange} />
+            <div>
+                <div className='filterEntry' className='hover'>
+                    <input type="checkbox" onChange={this.handleChange} />
                     {this.props.tag}
                    
                 </div>

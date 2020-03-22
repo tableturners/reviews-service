@@ -40,11 +40,12 @@ class DropDownRating extends React.Component {
             <div className="dropDown">
                 <h1 className='header'>Sort by</h1>
                 <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label"></InputLabel>
+                    <InputLabel  id="demo-simple-select-outlined-label"></InputLabel>
                     <Select
+                        className="hover"
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        defaultValue={constants.NEWEST_RATING}
+                        defaultValue={constants.HIGHEST_RATING}
                         onChange={this.handleChange}
 
                     >

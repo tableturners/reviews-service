@@ -1,14 +1,18 @@
 .dropDown {
-    width: 50%;
+    /* width: 50%;
     max-width: 600px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
     
 }
 
 .header{
     font-size:20px;
 }
-.hoverme:hover{
-    color: red;
+
+.hover{
+    border: 2px solid transparent;
+}
+.hover:hover{
+    border: 2px solid red;
 }
