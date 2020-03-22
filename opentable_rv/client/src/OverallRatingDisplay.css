@@ -1,0 +1,46 @@
+.overallDisplay{
+    width: 50%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    border-bottom: solid 1px #d8d9db;  
+    padding: 1%;  
+    display: flex;
+    flex-direction: row;
+}
+
+.ratings{
+    display: flex;
+    text-indent: 2em;
+}
+
+.ratingNum{
+    font-weight: bold;
+}
+
+.ratingsName{
+    display: flex;
+    text-indent: 1em;
+}
+
+.column1{
+    font-weight: bold;
+}
+.nosie{
+    display: flex;
+}
+
+.column4{
+    font-weight:bold;
+}
+.loved{
+    font-weight:bold;
+    align-content:center;
+}
+
+.grid:hover{
+    color: red;
+}
