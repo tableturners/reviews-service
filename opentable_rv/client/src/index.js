@@ -8,6 +8,8 @@ import keyTagMaker from './helpers/keyTagMaker.js'
 import DropDownRating from './DropDownRating.jsx';
 import * as constants from './helpers/constants.js';
 import OverallRatingDisplay from './OverallRatingDisplay.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 /* TODO(filtering):
 Data Structure: all of this in app state

@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import OverallRatingBar from './OverallRatingBar.jsx';
 
 const calcluateTheAveofRatingType = (allReview, ratingType) => {
     let totalOverAll = 0
@@ -64,7 +65,7 @@ const OverallRatingDisplay = (props) => {
                     <div className="loved">Loved For <ErrorOutlineIcon /></div>
                     <div className="grid">    
                         <Grid item xs={6}>
-                            <Paper ><LocalCafeIcon/>Most Booked 1000-Point Tables San Francisco</Paper>
+                            <Paper className="grid" ><LocalCafeIcon/>Most Booked 1000-Point Tables San Francisco</Paper>
                         </Grid>
                     </div>    
                     </div>
@@ -72,9 +73,9 @@ const OverallRatingDisplay = (props) => {
                 </div>
                 <div className="rightside">
 
-                    <div>
-                        star garph right here
-                </div>
+                    <table>
+                        {[5, 4, 3, 2, 1].map((starValue) => <OverallRatingBar starValue={starValue} allReview={props.allReview} />)}
+                    </table>
 
                 </div>
 
