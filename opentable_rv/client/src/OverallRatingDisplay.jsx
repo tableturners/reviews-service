@@ -4,11 +4,18 @@ import Rating from '@material-ui/lab/Rating';
 import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import OverallRatingBar from './OverallRatingBar.jsx';
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#ff6d75',
+    },
+    
+})(Rating);
 
 const calcluateTheAveofRatingType = (allReview, ratingType) => {
     let totalOverAll = 0
@@ -31,16 +38,21 @@ const OverallRatingDisplay = (props) => {
     return (
         <div className="overallDisplay">
 
-            <h1>
-                what {props.allReview.length} People Are Saying
-            </h1>
+            <h3>
+                What {props.allReview.length} People Are Saying
+            </h3>
             <div className='container'>
                 <div className="leftside">
 
                     <div className="column1">Overall ratings and reviews</div>
                     <div className="column2">Reviews can only be made by diners who have eaten at this restaurant</div>
                     <div className="column3">
-                        <Rating name="read-only" value={overall} precision={0.1} readOnly />
+                        <StyledRating
+                            name="customized-color"
+                            value={overall}
+                            precision={0.5}
+
+                        />
                         {calcluateTheAveofRatingType(props.allReview, 'overall')} &nbsp; based on recent ratings
                     </div>
                     <div className="ratings">
@@ -63,11 +75,11 @@ const OverallRatingDisplay = (props) => {
                     <div className="recommend">
                         <ThumbUpIcon />{random1to100NumGenegator()}% of people would recommend it to a friend
                     <div className="loved">Loved For <ErrorOutlineIcon /></div>
-                    <div className="grid">    
-                        <Grid item xs={6}>
-                            <Paper className="grid" ><LocalCafeIcon/>Most Booked 1000-Point Tables San Francisco</Paper>
-                        </Grid>
-                    </div>    
+                        <div className="grid">
+                            <Grid >
+                                <Paper className="grid" ><LocalCafeIcon />Most Booked 1000-Point Tables San Francisco</Paper>
+                            </Grid>
+                        </div>
                     </div>
 
                 </div>

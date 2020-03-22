@@ -45,7 +45,7 @@ class DropDownRating extends React.Component {
                         className="hover"
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        defaultValue={constants.NEWEST_RATING}
+                        defaultValue={constants.HIGHEST_RATING}
                         onChange={this.handleChange}
 
                     >

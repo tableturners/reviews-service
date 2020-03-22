@@ -57,8 +57,8 @@ const insertReview = function (randomId,callback) {
     let query = `
     INSERT INTO reviews (restaurant_id,username, place, dinedDate, postedReview, paragraph, overall, food, ambience, service, star)
     values("${randomId}","${faker.internet.userName()}", "${faker.address.state()}","${randomDate(new Date(2018, 0, 1), new Date())}",
-    "${faker.random.number(200)}","${faker.hacker.phrase()}","${faker.random.number(5)}","${faker.random.number(5)}",
-    "${faker.random.number(5)}","${faker.random.number(5)}","${faker.random.number(5)}"
+    "${faker.random.number(200)}","${faker.hacker.phrase()}","${faker.random.number({min:1, max:5})}","${faker.random.number({min:1, max:5})}",
+    "${faker.random.number({min:1, max:5})}","${faker.random.number({min:1, max:5})}","${faker.random.number({min:1, max:5})}"
     )`
     connection.query(query, (err, rows, fields) => {
         if (err) {

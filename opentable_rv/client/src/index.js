@@ -9,6 +9,7 @@ import DropDownRating from './DropDownRating.jsx';
 import * as constants from './helpers/constants.js';
 import OverallRatingDisplay from './OverallRatingDisplay.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 
 /* TODO(filtering):
@@ -156,8 +157,8 @@ class App extends React.Component {
         // console.log(this.state.allReview[0].id)
         //console.log(this.props.data);
         return (
-            <div>
-                <h1>ReviewList</h1>
+            <div className="AppContainer">
+            
                 <div>
                     <OverallRatingDisplay 
                         allReview={this.state.allReview}

@@ -25,9 +25,9 @@ export default class OverallRatingBar extends React.Component {
                 }
             }
         );
-        console.log(`calculating starReview percentage. Found ${totalNumStarValueReviews} reviews with rating ${this.props.starValue}`);
+        //console.log(`calculating starReview percentage. Found ${totalNumStarValueReviews} reviews with rating ${this.props.starValue}`);
         const percentage = totalNumStarValueReviews / this.props.allReview.length;
-        console.log(percentage);
+       // console.log(percentage);
         return percentage * 100;
     }
 
