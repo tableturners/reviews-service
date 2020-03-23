@@ -20,22 +20,22 @@ const insertRestaurant = function (callback) { // insert Restaurant
     })
 }
 
-const getrestaurantId = function (callback) { // get restaurantID
-    let query = `select id From restaurants`
-    connection.query(query, (err, rows, fields) => {
-        if (err) {
-            console.log('err in getrestaurantId', err)
-        } else {
-            //console.log('sssssss',rows)
-            //console.log('lllllll',fields)
-            const restaurandIds = rows.map((row) => {
-                return row.id;
-            });
-            console.log(restaurandIds)
-            callback(restaurandIds)
-        }
-    })
-}
+// const getrestaurantId = function (callback) { // get restaurantID
+//     let query = `select id From restaurants`
+//     connection.query(query, (err, rows, fields) => {
+//         if (err) {
+//             console.log('err in getrestaurantId', err)
+//         } else {
+//             //console.log('sssssss',rows)
+//             //console.log('lllllll',fields)
+//             const restaurandIds = rows.map((row) => {
+//                 return row.id;
+//             });
+//             console.log(restaurandIds)
+//             callback(restaurandIds)
+//         }
+//     })
+// }
 
 
 
@@ -76,6 +76,5 @@ const insertReview = function (randomId,callback) {
 module.exports = {
     getReviewListByRestaurantId,
     insertReview,
-    getrestaurantId,
     insertRestaurant
 }
