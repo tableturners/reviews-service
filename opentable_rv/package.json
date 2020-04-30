@@ -23,7 +23,7 @@
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mongoose": "^5.9.4",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.2",
